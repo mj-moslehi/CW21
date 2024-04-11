@@ -2,6 +2,7 @@ package model;
 
 import base.entity.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,22 +26,55 @@ public class Customer extends BaseEntity<Long> {
     @Column(unique = true)
     private String username;
 
+    @Pattern(regexp = "^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$")
+    private String password;
+
+    @Pattern(regexp = "^[0-9]{10}$")
     private String nationalId;
 
+    @Pattern(regexp = "^(\\+98|0)?9\\d{9}$")
     private String phoneNumber;
 
     private String address;
 
-//    @ElementCollection
-//    @CollectionTable(name = "customer_order" ,
-//            joinColumns = @JoinColumn(name = "customer_id"))
-//    @Column(name = "ordering")
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customer")
     private Collection<Ordering> orderings = new ArrayList<>() ;
 
     public Customer(String firstName, String lastName, Collection<Ordering> orderings) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.orderings = orderings;
+    }
+
+    public Customer(Long aLong, String firstName) {
+        super(aLong);
+        this.firstName = firstName;
+    }
+
+    public Customer(String firstName, String lastName, String username,
+                    String password, String nationalId, String phoneNumber, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.nationalId = nationalId;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+
+    public Customer(Long aLong, String firstName, String lastName, String username, String password, String nationalId, String phoneNumber, String address) {
+        super(aLong);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.nationalId = nationalId;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+
+    public void addOrdering(Ordering ordering) {
+        orderings.add(ordering);
+        ordering.setCustomer(this);
     }
 }

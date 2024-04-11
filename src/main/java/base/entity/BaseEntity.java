@@ -15,8 +15,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-public class BaseEntity <ID extends Serializable> implements Serializable{
+public class BaseEntity<ID extends Serializable> implements Serializable {
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected ID id;
 }

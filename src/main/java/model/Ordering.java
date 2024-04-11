@@ -1,6 +1,5 @@
 package model;
 
-import base.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +8,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,25 +21,29 @@ public class Ordering {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String OrderingCode;
+    private String orderingCode;
 
-    private String OrderingOwner;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    private String OrderingStatus;
+    private String orderingStatus;
 
     @ElementCollection
-    @CollectionTable(name = "ordering_fruit",
+    @CollectionTable(name = "fruit_order",
             joinColumns = @JoinColumn(name = "fruit_id"))
     @Column(name = "order")
-
     private Collection<Fruit> fruits = new ArrayList<>();
 
-    private String OrderingType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "delivery_type")
+    private DeliveryType deliveryType;
 
-    private String OrderingAllCost;
+    private String orderingAllCost;
 
-    public Ordering(String orderingOwner, Collection<Fruit> fruits) {
-        OrderingOwner = orderingOwner;
+    public Ordering(Customer customer, Collection<Fruit> fruits, DeliveryType deliveryType) {
+        this.customer = customer;
         this.fruits = fruits;
+        this.deliveryType = deliveryType;
     }
 }
