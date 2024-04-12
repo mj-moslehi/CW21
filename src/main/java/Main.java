@@ -8,14 +8,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import utility.Menu;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+
         Menu menu = new Menu();
         menu.signUp();
+
 
 //        SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 //
