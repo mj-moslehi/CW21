@@ -11,6 +11,7 @@ import lombok.Setter;
 //import org.jetbrains.annotations.NotNull;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,27 +24,27 @@ import java.util.Collection;
 
 public class Customer extends BaseEntity<Long> {
 
-//    @NotNull(message = "not null khodemoon")
+    @NotNull(message = "not null khodemoon")
     private String firstName;
 
     private String lastName;
 
-//    @Column(unique = true)
+    @Column(unique = true)
     private String username;
 
-//    @Pattern(regexp = "^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$")
+    @Pattern(regexp = "^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$")
     private String password;
 
-//@Email
+    @Email
     private String email;
 
-//    @Pattern(regexp = "^(\\+98|0)?9\\d{9}$")
+    @Pattern(regexp = "^(\\+98|0)?9\\d{9}$")
     private String phoneNumber;
 
     private String address;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customer")
-    private Collection<Ordering> orderings = new ArrayList<>() ;
+    private Collection<Ordering> orderings = new ArrayList<>();
 
     public Customer(String firstName, String lastName, Collection<Ordering> orderings) {
         this.firstName = firstName;

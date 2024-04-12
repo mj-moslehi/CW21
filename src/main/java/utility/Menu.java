@@ -36,21 +36,22 @@ public class Menu {
         String username = scanner.nextLine();
         System.out.println("password: ");
         String password = scanner.nextLine();
-        System.out.println("national code: ");
-        String nationalCode = scanner.nextLine();
+        System.out.println("email: ");
+        String email = scanner.nextLine();
         System.out.println("phone number: ");
         String phoneNumber = scanner.nextLine();
         System.out.println("address: ");
         String address = scanner.nextLine();
 
-
+        Customer customer = new Customer(id, firstName, lastName, username, password, email, phoneNumber, address);
 //        Customer customer = new Customer(id, firstName);
+//        customer.setEmail(email);
 //        Customer saved = customerService.saveOrUpdate(customer);
 //        if (saved != null)
 //            System.out.println("signed up successfully!");
 //        else
 //            System.out.println("Something went wrong, Please try again.");
-        Customer customer = new Customer(id, firstName, lastName, username, password, nationalCode, phoneNumber, address);
+
         Set<ConstraintViolation<Customer>> violations = validator.validate(customer);
 
         if (violations.isEmpty()) {
