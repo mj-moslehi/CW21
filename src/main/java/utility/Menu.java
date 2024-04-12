@@ -15,7 +15,6 @@ import java.util.Set;
 public class Menu {
     private final CustomerService customerService = ApplicationContext.getCustomerService();
     private final Scanner scanner = new Scanner(System.in);
-    // Create a validator factory and validator
     ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     Validator validator = validatorFactory.getValidator();
 
@@ -24,10 +23,8 @@ public class Menu {
     }
 
     public void signUp(){
-        System.out.println("--- Signing in ---");
-        System.out.println("id: ");
-        Long id = scanner.nextLong();
-        scanner.nextLine();
+        System.out.println("--- Signing up ---");
+
         System.out.println("first name: ");
         String firstName = scanner.nextLine();
         System.out.println("last name: ");
@@ -43,14 +40,7 @@ public class Menu {
         System.out.println("address: ");
         String address = scanner.nextLine();
 
-        Customer customer = new Customer(id, firstName, lastName, username, password, email, phoneNumber, address);
-//        Customer customer = new Customer(id, firstName);
-//        customer.setEmail(email);
-//        Customer saved = customerService.saveOrUpdate(customer);
-//        if (saved != null)
-//            System.out.println("signed up successfully!");
-//        else
-//            System.out.println("Something went wrong, Please try again.");
+        Customer customer = new Customer(firstName, lastName, username, password, email, phoneNumber, address);
 
         Set<ConstraintViolation<Customer>> violations = validator.validate(customer);
 
@@ -61,6 +51,7 @@ public class Menu {
             System.out.println("Invalid user data found:");
             for (ConstraintViolation<Customer> violation : violations) {
                 System.out.println(violation.getMessage());
+
             }
         }
 

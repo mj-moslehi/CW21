@@ -29,16 +29,16 @@ public class Customer extends BaseEntity<Long> {
 
     private String lastName;
 
-    @Column(unique = true)
+//    @Column(unique = true)
     private String username;
 
-    @Pattern(regexp = "^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$")
+    //@Pattern(regexp = "^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$")
     private String password;
 
-    @Email
+//    @Email
     private String email;
 
-    @Pattern(regexp = "^(\\+98|0)?9\\d{9}$")
+    //@Pattern(regexp = "^(\\+98|0)?9\\d{9}$")
     private String phoneNumber;
 
     private String address;
@@ -46,30 +46,7 @@ public class Customer extends BaseEntity<Long> {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customer")
     private Collection<Ordering> orderings = new ArrayList<>();
 
-    public Customer(String firstName, String lastName, Collection<Ordering> orderings) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.orderings = orderings;
-    }
-
-    public Customer(Long aLong, String firstName) {
-        super(aLong);
-        this.firstName = firstName;
-    }
-
-    public Customer(String firstName, String lastName, String username,
-                    String password, String nationalId, String phoneNumber, String address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-    }
-
-    public Customer(Long aLong, String firstName, String lastName, String username, String password, String nationalId, String phoneNumber, String address) {
-        super(aLong);
+    public Customer(String firstName, String lastName, String username, String password, String email, String phoneNumber, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

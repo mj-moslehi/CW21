@@ -30,10 +30,10 @@ public class Ordering {
     private String orderingStatus;
 
     @ElementCollection
-    @CollectionTable(name = "fruit_order",
+    @CollectionTable(name = "pocket",
             joinColumns = @JoinColumn(name = "fruit_id"))
-    @Column(name = "order")
-    private Collection<Fruit> fruits = new ArrayList<>();
+    @Column(name = "pocket_id")
+    private Collection<Pocket> pockets = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "delivery_type")
@@ -41,9 +41,9 @@ public class Ordering {
 
     private String orderingAllCost;
 
-    public Ordering(Customer customer, Collection<Fruit> fruits, DeliveryType deliveryType) {
+    public Ordering(Customer customer, Collection<Pocket> pockets, DeliveryType deliveryType) {
         this.customer = customer;
-        this.fruits = fruits;
+        this.pockets = pockets;
         this.deliveryType = deliveryType;
     }
 }
