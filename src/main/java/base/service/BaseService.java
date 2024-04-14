@@ -5,12 +5,12 @@ import base.repository.BaseRepository;
 
 import java.io.Serializable;
 
-public interface BaseService <T extends BaseEntity<ID> , ID extends Serializable> {
+public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> {
 
     T saveOrUpdate(T entity);
 
-    T findByUsername(String username);
+    T findById(ID id);
 
-    void deleteByUsername(String username);
-
+    void delete(T t);
 }
+

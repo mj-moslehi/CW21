@@ -21,7 +21,7 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(Customer.class)
                     .addAnnotatedClass(Fruit.class)
                     .addAnnotatedClass(Ordering.class)
-                    .addAnnotatedClass(PostType.class)
+                    .addAnnotatedClass(DeliveryType.class)
                     .addAnnotatedClass(Manager.class)
                     .buildMetadata()
                     .buildSessionFactory();
